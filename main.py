@@ -11,7 +11,7 @@ pd.set_option('max_colwidth', None)
 
 print("\n-----\n")
 
-df = pd.read_csv("./small.csv")
+df = pd.read_csv("./2split.csv")
 #print(df.head())
 
 
@@ -55,7 +55,7 @@ sc.fit(df)
 data_scaled = sc.transform(df)
 #df = pd.DataFrame(data_scaled)
 index=df.index
-'''df = pd.DataFrame(
+df = pd.DataFrame(
 		data_scaled,
 		columns=[
 				'Diabetes_binary', 'HighBP', 'HighChol', 'BMI', 'Smoker', 'Stroke',
@@ -64,15 +64,8 @@ index=df.index
 				'PhysHlth_Bucket', 'MentHlth_Bucket'
 		],
 		index=df.index
-)'''
-
-df = pd.DataFrame(
-		data_scaled,
-		columns=['Diabetes_binary','HighBP','HighChol','BMI','Smoker','HeartDiseaseorAttack','Fruits','Veggies','GenHlth','DiffWalk','Sex','Age',
-				'PhysHlth_Bucket', 'MentHlth_Bucket'
-		],
-		index=df.index
 )
+
 
 #
 
@@ -84,7 +77,7 @@ print(df.head())
 from sklearn.model_selection import train_test_split
 X = df.drop("Diabetes_binary", axis=1)
 y = df["Diabetes_binary"]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,  random_state = 0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10,  random_state = 0)
 
 from sklearn.ensemble import RandomForestClassifier
 forest = RandomForestClassifier(n_estimators=100, class_weight = 'balanced', max_depth=7)
